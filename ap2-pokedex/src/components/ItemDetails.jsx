@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import useFetch from '../hooks/useFetch.js'
 import { getArtworkUrl, getPokemonUrl } from '../services/api.js'
+import { getTypeColors } from '../services/typeColors.js'
 import FavoriteButton from './FavoriteButton.jsx'
 import LoadingSpinner from './LoadingSpinner.jsx'
 
@@ -94,22 +95,27 @@ function ItemDetails({ pokemonId, isFavorite, onClose, onToggleFavorite }) {
 
         {data && (
           <>
-            <img
-              src={getArtworkUrl(data.id)}
-              alt={`Imagem de ${data.name}`}
-              className="mx-auto h-48 w-48 object-contain"
-            />
+            {/* Gradiente de fundo pelo tipo principal */}
+            <div
+              className={`mb-4 rounded-2xl bg-gradient-to-b ${getTypeColors(data.types[0].type.name).gradient} to-white p-4`}
+            >
+              <img
+                src={getArtworkUrl(data.id)}
+                alt={`Imagem de ${data.name}`}
+                className="mx-auto h-48 w-48 object-contain drop-shadow-lg"
+              />
 
-            <ul className="mb-4 flex flex-wrap justify-center gap-2">
-              {data.types.map(({ type }) => (
-                <li
-                  key={type.name}
-                  className="rounded-full bg-slate-200 px-3 py-1 text-sm font-medium capitalize text-slate-700"
-                >
-                  {type.name}
-                </li>
-              ))}
-            </ul>
+              <ul className="mt-2 flex flex-wrap justify-center gap-2">
+                {data.types.map(({ type }) => (
+                  <li
+                    key={type.name}
+                    className={`rounded-full px-3 py-1 text-sm font-medium capitalize shadow-sm ${getTypeColors(type.name).chip}`}
+                  >
+                    {type.name}
+                  </li>
+                ))}
+              </ul>
+            </div>
 
             <dl className="mb-4 grid grid-cols-2 gap-4 text-center">
               <div className="rounded-xl bg-slate-50 p-3">

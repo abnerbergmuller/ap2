@@ -58,8 +58,10 @@ function Home() {
   const handleClose = useCallback(() => setSelectedId(null), [])
 
   return (
-    <main className="mx-auto min-h-screen max-w-7xl bg-slate-50 px-4 py-8">
-      <h1 className="mb-6 text-3xl font-bold text-slate-800">Catálogo de Pokémons</h1>
+    <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-10 lg:px-8">
+      <h1 className="mb-6 bg-gradient-to-r from-red-500 to-orange-500 bg-clip-text text-3xl font-extrabold text-transparent sm:text-4xl">
+        Catálogo de Pokémons
+      </h1>
 
       <SearchForm
         search={search}
