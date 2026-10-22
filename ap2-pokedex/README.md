@@ -31,6 +31,8 @@ JavaScript puro (`.js` e `.jsx`), `fetch` nativo, sem bibliotecas de UI, de rota
 
 Pré-requisito: Node.js e npm instalados.
 
+O projeto fica na pasta `ap2-pokedex/` do repositório; rode os comandos abaixo dentro dela.
+
 ```bash
 npm install       # instala as dependências
 npm run dev       # servidor de desenvolvimento (URL exibida no terminal)
@@ -98,7 +100,6 @@ src/
 ├── App.jsx                  # fundo da página e renderização de Home
 ├── main.jsx                 # ponto de entrada
 └── index.css                # apenas @import "tailwindcss"
-docs/                        # prints da aplicação
 ```
 
 ## Mapeamento com a rubrica
@@ -129,9 +130,3 @@ docs/                        # prints da aplicação
 - **Card como `div` com dois botões:** evita botão dentro de botão (HTML inválido) ao colocar o coração sobre o card.
 - **Lint com oxlint:** é o linter que já vem configurado no template do projeto (`npm run lint`).
 - **Modal com `useCallback`:** `onClose` estável para o effect do Esc não recriar o listener a cada render.
-
-## Prints
-
-![Versão desktop](docs/print-desktop.png)
-
-![Versão mobile](docs/print-mobile.png)
