@@ -14,17 +14,13 @@ const STAT_LABELS = {
   speed: 'Velocidade',
 }
 
-// Maior valor base de stat possível, usado para calcular a largura das barras
 const MAX_STAT = 255
 
-// Modal de detalhes. Sem pokemonId (nada selecionado) não renderiza nem requisita.
 function ItemDetails({ pokemonId, isFavorite, onClose, onToggleFavorite }) {
-  // url nula => useFetch não faz requisição
   const { data, loading, error, refetch } = useFetch(
     pokemonId ? getPokemonUrl(pokemonId) : null,
   )
 
-  // Fecha com a tecla Esc; o cleanup remove o listener ao fechar/desmontar
   useEffect(() => {
     if (!pokemonId) return undefined
 
@@ -37,7 +33,6 @@ function ItemDetails({ pokemonId, isFavorite, onClose, onToggleFavorite }) {
 
   if (!pokemonId) return null
 
-  // Fecha só se o clique foi no fundo, não dentro do painel
   const handleBackdropClick = (event) => {
     if (event.target === event.currentTarget) onClose()
   }
@@ -95,7 +90,6 @@ function ItemDetails({ pokemonId, isFavorite, onClose, onToggleFavorite }) {
 
         {data && (
           <>
-            {/* Gradiente de fundo pelo tipo principal */}
             <div
               className={`mb-4 rounded-2xl bg-gradient-to-b ${getTypeColors(data.types[0].type.name).gradient} to-white p-4`}
             >
@@ -120,7 +114,6 @@ function ItemDetails({ pokemonId, isFavorite, onClose, onToggleFavorite }) {
             <dl className="mb-4 grid grid-cols-2 gap-4 text-center">
               <div className="rounded-xl bg-slate-50 p-3">
                 <dt className="text-xs uppercase text-slate-500">Altura</dt>
-                {/* A API devolve decímetros e hectogramas */}
                 <dd className="font-semibold text-slate-800">{data.height / 10} m</dd>
               </div>
               <div className="rounded-xl bg-slate-50 p-3">
@@ -149,7 +142,6 @@ function ItemDetails({ pokemonId, isFavorite, onClose, onToggleFavorite }) {
                   <span className="w-28 text-slate-600">{STAT_LABELS[stat.name] ?? stat.name}</span>
                   <span className="w-8 text-right font-semibold text-slate-800">{value}</span>
                   <div className="h-2 flex-1 overflow-hidden rounded-full bg-slate-100">
-                    {/* Largura dinâmica: única forma de usar um valor calculado em runtime */}
                     <div
                       className="h-full rounded-full bg-gradient-to-r from-red-400 to-red-600"
                       style={{ width: `${Math.min((value / MAX_STAT) * 100, 100)}%` }}

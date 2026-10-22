@@ -7,10 +7,8 @@ import useFetch from '../hooks/useFetch.js'
 import useLocalStorage from '../hooks/useLocalStorage.js'
 import { getIdFromUrl, getPokemonListUrl } from '../services/api.js'
 
-// Url fixa: calculada fora do componente para não mudar a cada render
 const LIST_URL = getPokemonListUrl()
 
-// Funções de ordenação por opção do <select>
 const SORTERS = {
   number: (a, b) => a.id - b.id,
   az: (a, b) => a.name.localeCompare(b.name),
@@ -20,22 +18,18 @@ const SORTERS = {
 function Home() {
   const { data, loading, error, refetch } = useFetch(LIST_URL)
 
-  // Normaliza a resposta da API para { id, name }
   const pokemons = useMemo(
     () => (data ? data.results.map((p) => ({ id: getIdFromUrl(p.url), name: p.name })) : []),
     [data],
   )
 
-  // Estado da página fica aqui e desce para os componentes via props
   const [search, setSearch] = useState('')
   const [sort, setSort] = useState('number')
   const [onlyFavorites, setOnlyFavorites] = useState(false)
   const [selectedId, setSelectedId] = useState(null)
 
-  // Favoritos (lista de ids) persistidos no localStorage
   const [favorites, setFavorites] = useLocalStorage('favorites', [])
 
-  // Filtros (nome case-insensitive e favoritos, no cliente) e ordenação
   const visiblePokemons = useMemo(() => {
     const term = search.trim().toLowerCase()
     return pokemons
@@ -49,12 +43,10 @@ function Home() {
     setSort('number')
   }
 
-  // Adiciona ou remove o id da lista de favoritos
   const handleToggleFavorite = (id) => {
     setFavorites((prev) => (prev.includes(id) ? prev.filter((f) => f !== id) : [...prev, id]))
   }
 
-  // useCallback mantém a função estável para o effect do Esc no modal
   const handleClose = useCallback(() => setSelectedId(null), [])
 
   return (

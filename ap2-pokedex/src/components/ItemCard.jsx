@@ -1,7 +1,6 @@
 import { getArtworkUrl } from '../services/api.js'
 import FavoriteButton from './FavoriteButton.jsx'
 
-// Card individual: dados chegam por props, ações sobem por callbacks
 function ItemCard({ item, isFavorite, onSelect, onToggleFavorite }) {
   return (
     <div className="relative rounded-2xl bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-lg">

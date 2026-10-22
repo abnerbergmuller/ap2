@@ -1,5 +1,3 @@
-// Mapa constante: tipo do pokémon -> classes Tailwind (chip e gradiente de fundo).
-// As classes ficam escritas por completo para o Tailwind conseguir detectá-las.
 const TYPE_COLORS = {
   normal: { chip: 'bg-stone-400 text-white', gradient: 'from-stone-200' },
   fire: { chip: 'bg-orange-500 text-white', gradient: 'from-orange-200' },
@@ -21,7 +19,6 @@ const TYPE_COLORS = {
   fairy: { chip: 'bg-fuchsia-400 text-fuchsia-950', gradient: 'from-fuchsia-200' },
 }
 
-// Tipo desconhecido usa as cores de "normal"
 export const getTypeColors = (typeName) => TYPE_COLORS[typeName] ?? TYPE_COLORS.normal
 
 export default TYPE_COLORS

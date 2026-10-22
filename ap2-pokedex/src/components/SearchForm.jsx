@@ -1,6 +1,4 @@
-// Formulário controlado: os valores vêm do pai (Home) e as mudanças sobem por callbacks
 function SearchForm({ search, sort, onSearchChange, onSortChange, onClear }) {
-  // O filtro é aplicado a cada tecla; o submit só evita o recarregamento da página
   const handleSubmit = (event) => {
     event.preventDefault()
   }

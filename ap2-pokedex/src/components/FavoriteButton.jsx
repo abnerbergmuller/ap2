@@ -1,4 +1,3 @@
-// Botão de coração reutilizado no card e no modal
 function FavoriteButton({ isFavorite, name, onToggle, className = '' }) {
   return (
     <button
